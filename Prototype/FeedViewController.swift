@@ -16,6 +16,13 @@ struct FeedImageViewModel {
 class FeedViewController: UITableViewController {
     private var feed = [FeedImageViewModel]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        refresh()
+        tableView.setContentOffset(CGPoint(x: 0, y: -tableView.contentInset.top), animated: false)
+    }
+    
     @IBAction func refresh() {
         refreshControl?.beginRefreshing()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
